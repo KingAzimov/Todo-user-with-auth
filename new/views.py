@@ -49,8 +49,8 @@ def register(request):
         return redirect('/')
     return render(request, 'register.html')
 
-def ochirish(request):
-    data={
-        TODO.objects.get(id=pk).delete()
-    }
-    return redirect(request, '/todo/', data)
+def ochirish(request, son):
+    t = TODO.objects.get(id=son)
+    if request.user == t.student.user:
+        t.delete()
+    return redirect('/todo/')
